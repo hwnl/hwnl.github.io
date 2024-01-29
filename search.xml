@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>微服务架构编码构建</title>
+    <title>Rest微服务架构编码构建</title>
     <url>/2024/01/29/Rest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/</url>
     <content><![CDATA[<h2 id="创建父工程"><a href="#创建父工程" class="headerlink" title="创建父工程"></a>创建父工程</h2><h3 id="New-Project"><a href="#New-Project" class="headerlink" title="New Project"></a>New Project</h3><img src="/2024/01/29/Rest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/image-20240129150811210.png" class="" title="test">
 
@@ -43,7 +43,34 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>springcloud</tag>
+        <tag>Rest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DependencyManagement和Dependencies区别</title>
+    <url>/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>dependencyManagement</p>
+<p>Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。<br>通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。</p>
+<p>使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven 会沿着父子层次向上走，直到找到一个拥有dependencyManagement 元素的项目，然后它就会使用这个<br>dependencyManagement 元素中指定的版本号。</p>
+<img src="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png" class="" title="test">
+
+<p>这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 ；另外如果某个子项目需要另外的一个版本，只需要声明version就可。</p>
+<ul>
+<li><pre><code>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
+</code></pre>
+</li>
+<li><p>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，<br> 才会从父项目中继承该项，并且version和scope都读取自父pom;</p>
+</li>
+<li><pre><code>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+</code></pre>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
       </tags>
   </entry>
 </search>

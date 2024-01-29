@@ -207,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/01/29/Rest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/" class="post-title-link" itemprop="url">微服务架构编码构建</a>
+            <a href="/2024/01/29/Rest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/" class="post-title-link" itemprop="url">Rest微服务架构编码构建</a>
         </h2>
 
         <div class="post-meta">
@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：15:56:21" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
+              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：16:05:08" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,6 +275,89 @@
 
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/consumer/payment/get/1</span><br></pre></td></tr></table></figure>
 
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="何伟">
+      <meta itemprop="description" content="记录学习，记录生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何伟个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">DependencyManagement和Dependencies区别</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：16:11:13" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/maven/" itemprop="url" rel="index"><span itemprop="name">maven</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>dependencyManagement</p>
+<p>Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。<br>通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。</p>
+<p>使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven 会沿着父子层次向上走，直到找到一个拥有dependencyManagement 元素的项目，然后它就会使用这个<br>dependencyManagement 元素中指定的版本号。</p>
+<img src="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png" class="" title="test">
+
+<p>这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 ；另外如果某个子项目需要另外的一个版本，只需要声明version就可。</p>
+<ul>
+<li><pre><code>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
+</code></pre>
+</li>
+<li><p>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，<br> 才会从父项目中继承该项，并且version和scope都读取自父pom;</p>
+</li>
+<li><pre><code>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+</code></pre>
+</li>
+</ul>
 
       
     </div>
@@ -358,20 +441,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
