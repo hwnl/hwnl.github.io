@@ -22,22 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="dependencyManagement Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。 使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。Maven 会沿着父子层次向上走，直到">
+  <meta name="description" content="Zookeeper注册中心简介zookeeper是一个分布式协调工具，可以实现注册中心功能 需要先去下载Zookeeper软件的linux版本，然后关闭Linux服务器防火墙后启动zookeeper服务器 zookeeper服务器取代Eureka服务器，zk作为服务注册中心 服务注册添加pom1234&lt;dependency&gt;    &lt;groupId&gt;org.springfr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DependencyManagement和Dependencies区别">
-<meta property="og:url" content="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:title" content="Zookeeper服务注册与发现">
+<meta property="og:url" content="http://example.com/2024/01/29/Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/index.html">
 <meta property="og:site_name" content="何伟个人博客">
-<meta property="og:description" content="dependencyManagement Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。 使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。Maven 会沿着父子层次向上走，直到">
+<meta property="og:description" content="Zookeeper注册中心简介zookeeper是一个分布式协调工具，可以实现注册中心功能 需要先去下载Zookeeper软件的linux版本，然后关闭Linux服务器防火墙后启动zookeeper服务器 zookeeper服务器取代Eureka服务器，zk作为服务注册中心 服务注册添加pom1234&lt;dependency&gt;    &lt;groupId&gt;org.springfr">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png">
 <meta property="article:published_time" content="2024-01-29T07:05:00.000Z">
-<meta property="article:modified_time" content="2024-01-29T08:11:13.784Z">
+<meta property="article:modified_time" content="2024-01-29T09:00:56.892Z">
 <meta property="article:author" content="何伟">
-<meta property="article:tag" content="maven">
+<meta property="article:tag" content="Zookeeper">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png">
 
-<link rel="canonical" href="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/">
+<link rel="canonical" href="http://example.com/2024/01/29/Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
 
 
 <script id="page-configurations">
@@ -50,7 +48,7 @@
   };
 </script>
 
-  <title>DependencyManagement和Dependencies区别 | 何伟个人博客</title>
+  <title>Zookeeper服务注册与发现 | 何伟个人博客</title>
   
 
 
@@ -199,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/29/Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -212,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          DependencyManagement和Dependencies区别
+          Zookeeper服务注册与发现
         </h1>
 
         <div class="post-meta">
@@ -223,7 +221,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：16:11:13" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
+              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：17:00:56" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/maven/" itemprop="url" rel="index"><span itemprop="name">maven</span></a>
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
                 </span>
             </span>
 
@@ -246,22 +244,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>dependencyManagement</p>
-<p>Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。<br>通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。</p>
-<p>使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven 会沿着父子层次向上走，直到找到一个拥有dependencyManagement 元素的项目，然后它就会使用这个<br>dependencyManagement 元素中指定的版本号。</p>
-<img src="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png" class="" title="test">
+        <h1 id="Zookeeper注册中心简介"><a href="#Zookeeper注册中心简介" class="headerlink" title="Zookeeper注册中心简介"></a>Zookeeper注册中心简介</h1><p>zookeeper是一个分布式协调工具，可以实现注册中心功能</p>
+<p>需要先去下载Zookeeper软件的linux版本，然后关闭Linux服务器防火墙后启动zookeeper服务器</p>
+<p>zookeeper服务器取代Eureka服务器，zk作为服务注册中心</p>
+<h1 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h1><h2 id="添加pom"><a href="#添加pom" class="headerlink" title="添加pom"></a>添加pom</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-zookeeper-discovery&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<p>这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 ；另外如果某个子项目需要另外的一个版本，只需要声明version就可。</p>
-<ul>
-<li><pre><code>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
-</code></pre>
-</li>
-<li><p>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，<br> 才会从父项目中继承该项，并且version和scope都读取自父pom;</p>
-</li>
-<li><pre><code>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
-</code></pre>
-</li>
-</ul>
+<p>如果有报错，换成下面的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- SpringBoot整合zookeeper客户端 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-zookeeper-discovery&lt;/artifactId&gt;</span><br><span class="line">    &lt;!--先排除自带的zookeeper3.5.3--&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--添加zookeeper3.4.9版本--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.4.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改yml"><a href="#修改yml" class="headerlink" title="修改yml"></a>修改yml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#8004表示注册到zookeeper服务器的支付服务提供者端口号</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8004</span></span><br><span class="line"><span class="comment">#服务别名----注册zookeeper到注册中心名称</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-provider-payment</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">zookeeper:</span></span><br><span class="line">      <span class="attr">connect-string:</span> <span class="number">192.168</span><span class="number">.111</span><span class="number">.144</span><span class="string">:2181</span></span><br></pre></td></tr></table></figure>
+
+<p>connect-string 代表zookpper注册中心的ip和端口</p>
+<h2 id="主启动类添加注解"><a href="#主启动类添加注解" class="headerlink" title="主启动类添加注解"></a>主启动类添加注解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableDiscoveryClient</span><br></pre></td></tr></table></figure>
+
+<p>zookeeper是没有界面的</p>
 
     </div>
 
@@ -271,7 +267,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/maven/" rel="tag"># maven</a>
+              <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
           </div>
 
         
@@ -279,10 +275,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2024/01/29/Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" rel="next" title="Zookeeper服务注册与发现">
-      Zookeeper服务注册与发现 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/" rel="prev" title="DependencyManagement和Dependencies区别">
+      <i class="fa fa-chevron-left"></i> DependencyManagement和Dependencies区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/29/Rest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/" rel="next" title="Rest微服务架构编码构建">
+      Rest微服务架构编码构建 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -342,6 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Zookeeper%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper注册中心简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.</span> <span class="nav-text">服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0pom"><span class="nav-number">2.1.</span> <span class="nav-text">添加pom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9yml"><span class="nav-number">2.2.</span> <span class="nav-text">修改yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%90%AF%E5%8A%A8%E7%B1%BB%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">主启动类添加注解</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
