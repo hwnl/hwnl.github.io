@@ -9,7 +9,7 @@ http://example.com/search/index-1.html
 http://example.com/search/index.html
 http://example.com/
 http://example.com/tags/java/
-http://example.com/tags/test/
 http://example.com/tags/springcloud/
-http://example.com/categories/java/
+http://example.com/tags/test/
 http://example.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
+http://example.com/categories/java/
