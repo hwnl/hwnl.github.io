@@ -19,8 +19,16 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>test</title>
     <url>/2024/01/29/test/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>fsf dsf sdf adsfsdfsfseffsfefwef</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>test</tag>
+      </tags>
   </entry>
 </search>
