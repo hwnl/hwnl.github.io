@@ -193,6 +193,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="何伟">
+      <meta itemprop="description" content="记录学习，记录生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何伟个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">WebSocket入门与实践</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-30 20:24:00 / 修改时间：22:31:55" itemprop="dateCreated datePublished" datetime="2024-01-30T20:24:00+08:00">2024-01-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WebSocket/" itemprop="url" rel="index"><span itemprop="name">WebSocket</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="为什么要websocket"><a href="#为什么要websocket" class="headerlink" title="为什么要websocket"></a>为什么要websocket</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">服务器不能直接向客户端发送请求，常用的方式是浏览器通过轮询的方式来告诉服务端</span><br><span class="line">Wbesocket可以在浏览器和服务端建立一个全双工的通信</span><br></pre></td></tr></table></figure>
+
+<h1 id="Websocket通信流程"><a href="#Websocket通信流程" class="headerlink" title="Websocket通信流程"></a>Websocket通信流程</h1><ol>
+<li><p>浏览器发起http请求，请求建立WebSocket连接</p>
+<img src="/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/image-20240130203526726.png" class="" title="test">
+
+</li>
+<li><p>服务器响应同意协议更改</p>
+<img src="/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/image-20240130203630379.png" class="" title="test"></li>
+</ol>
+<img src="/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/image-20240130203850640.png" class="" title="test">
+<img src="C:\Users\hewei\AppData\Roaming\Typora\typora-user-images\image-20240130203850640.png" alt="image-20240130203850640" style="zoom:67%;" />
+
+
+
+<h1 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h1><img src="C:\Users\hewei\AppData\Roaming\Typora\typora-user-images\image-20240130204111546.png" alt="image-20240130204111546" style="zoom:67%;" />
+
+
+
+<h1 id="基于Java注解实现WebSocket服务器端"><a href="#基于Java注解实现WebSocket服务器端" class="headerlink" title="基于Java注解实现WebSocket服务器端"></a>基于Java注解实现WebSocket服务器端</h1><h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebSocketConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ServerEndpointExporter serverEndpointExporter()&#123;</span><br><span class="line">        return new ServerEndpointExporter();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务类"><a href="#服务类" class="headerlink" title="服务类"></a>服务类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 监听哪个客户端连接了服务端</span><br><span class="line">@ServerEndpoint(&quot;/myWs&quot;)</span><br><span class="line">@Component</span><br><span class="line">public class WsServerEndpoint &#123;</span><br><span class="line">    static Map&lt;String, Session&gt; sessionMap = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    // 打开连接，当客户端连接后，将它保存到map里面</span><br><span class="line">    @OnOpen</span><br><span class="line">    public void onOpen(Session session)&#123;</span><br><span class="line">        sessionMap.put(session.getId(),session);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   // 相互通信</span><br><span class="line">    @OnMessage</span><br><span class="line">    public String onMessage(String text)&#123;</span><br><span class="line">        System.out.println(&quot;收到了客户端的消息&quot;+text);</span><br><span class="line">        return &quot;我已经收到了你的消息&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnClose</span><br><span class="line">    public void onClose(Session session)&#123;</span><br><span class="line">        sessionMap.remove(session.getId());</span><br><span class="line">        System.out.println(&quot;连接关闭&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Scheduled(fixedRate = 2000)</span><br><span class="line">    public void sendMsg() throws IOException&#123;</span><br><span class="line">        for(String key:sessionMap.keySet())&#123;</span><br><span class="line">            sessionMap.get(key).getBasicRemote().sendText(&quot;心跳&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>onOpen方法是连接建立后，调用的</p>
+<p>onMessage方法是客户端发送给服务端消息调用的</p>
+<p>onClose方法是关闭连接调用的</p>
+<p>sendMsg方法展示了服务端给客户端发送消息的过程</p>
+<h2 id="启动类"><a href="#启动类" class="headerlink" title="启动类"></a>启动类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WsApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(WsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端代码实现"><a href="#前端代码实现" class="headerlink" title="前端代码实现"></a>前端代码实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;ws client&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    let ws = new WebSocket(&quot;ws://localhost:8080/myWs&quot;);</span><br><span class="line">    ws.onopen=function ()&#123;</span><br><span class="line">        ws.send(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    ws.onmessage=function (message)&#123;</span><br><span class="line">        console.log(message.data);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>前端使用onopen用来给服务端发送消息</p>
+<p>使用onmessage来接受服务端消息</p>
+<h1 id="基于Spring框架实现的WebSocket服务端"><a href="#基于Spring框架实现的WebSocket服务端" class="headerlink" title="基于Spring框架实现的WebSocket服务端"></a>基于Spring框架实现的WebSocket服务端</h1><h2 id="创建拦截器"><a href="#创建拦截器" class="headerlink" title="创建拦截器"></a>创建拦截器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyWsInterceptor</span> <span class="keyword">extends</span> <span class="title class_">HttpSessionHandshakeInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">beforeHandshake</span><span class="params">(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map&lt;String, Object&gt; attributes)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(request.getRemoteAddress().toString()+<span class="string">&quot;开始握手&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.beforeHandshake(request, response, wsHandler, attributes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 完成握手后将http升级为websocket协议</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterHandshake</span><span class="params">(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception ex)</span> &#123;</span><br><span class="line">        System.out.println(request.getRemoteAddress().toString()+<span class="string">&quot;完成握手&quot;</span>);</span><br><span class="line">        <span class="built_in">super</span>.afterHandshake(request, response, wsHandler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建连接处理类"><a href="#创建连接处理类" class="headerlink" title="创建连接处理类"></a>创建连接处理类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyWsHandler extends AbstractWebSocketHandler &#123;</span><br><span class="line">    private Map&lt;String, WebSocketSession&gt; sessionMap = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    // 连接建立</span><br><span class="line">    @Override</span><br><span class="line">    public void afterConnectionEstablished(WebSocketSession session) throws Exception &#123;</span><br><span class="line">        super.afterConnectionEstablished(session);</span><br><span class="line">        sessionMap.put(session.getId(),session);</span><br><span class="line">        System.out.println(&quot;连接建立&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 收到消息</span><br><span class="line">    @Override</span><br><span class="line">    public void handleMessage(WebSocketSession session, WebSocketMessage&lt;?&gt; message) throws Exception &#123;</span><br><span class="line">        super.handleMessage(session, message);</span><br><span class="line">        System.out.println(session.getId()+&quot;发送了了消息&quot;+message.getPayload());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 传输异常</span><br><span class="line">    @Override</span><br><span class="line">    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception &#123;</span><br><span class="line">        super.handleTransportError(session, exception);</span><br><span class="line">        if(session.isOpen())&#123;</span><br><span class="line">            session.close();</span><br><span class="line">            sessionMap.remove(session.getId());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 连接关闭</span><br><span class="line">    @Override</span><br><span class="line">    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception &#123;</span><br><span class="line">        super.afterConnectionClosed(session, status);</span><br><span class="line">        System.out.println(session.getId()+&quot;关闭了连接&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Scheduled(fixedRate = 2000)</span><br><span class="line">    public void sendMsg() throws IOException &#123;</span><br><span class="line">        for(String key:sessionMap.keySet())&#123;</span><br><span class="line">            sessionMap.get(key).sendMessage(new TextMessage(&quot;心跳&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建配置类"><a href="#创建配置类" class="headerlink" title="创建配置类"></a>创建配置类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSocket</span><br><span class="line">public class MyWsConfig implements WebSocketConfigurer &#123;</span><br><span class="line">    @Resource</span><br><span class="line">    MyWsHandler myWsHandler;</span><br><span class="line">    @Resource</span><br><span class="line">    MyWsInterceptor myWsInterceptor;</span><br><span class="line">    @Override</span><br><span class="line">    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addHandler(myWsHandler,&quot;/myWs1&quot;)</span><br><span class="line">                .addInterceptors(myWsInterceptor)</span><br><span class="line">                .setAllowedOrigins(&quot;*&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;ws client&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    let ws = new WebSocket(&quot;ws://localhost:8080/myWs1&quot;);</span><br><span class="line">    ws.onopen=function ()&#123;</span><br><span class="line">        ws.send(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    ws.onmessage=function (message)&#123;</span><br><span class="line">        console.log(message.data);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/29/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -321,6 +431,73 @@
 
 
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/29/Gateway%E7%BD%91%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="何伟">
+      <meta itemprop="description" content="记录学习，记录生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何伟个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/29/Gateway%E7%BD%91%E5%85%B3/" class="post-title-link" itemprop="url">Rest微服务架构编码构建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-29 15:05:00 / 修改时间：17:36:08" itemprop="dateCreated datePublished" datetime="2024-01-29T15:05:00+08:00">2024-01-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
       
     </div>
 
@@ -772,20 +949,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
