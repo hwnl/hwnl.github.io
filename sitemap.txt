@@ -12,13 +12,13 @@ http://example.com/schedule/index.html
 http://example.com/search/index-1.html
 http://example.com/search/index.html
 http://example.com/
-http://example.com/tags/gateway/
 http://example.com/tags/Eureka/
+http://example.com/tags/gateway/
 http://example.com/tags/OpenFeign/
-http://example.com/tags/WebSocket/
-http://example.com/tags/Zookeeper/
 http://example.com/tags/java/
 http://example.com/tags/Rest/
+http://example.com/tags/WebSocket/
+http://example.com/tags/Zookeeper/
 http://example.com/tags/maven/
 http://example.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
 http://example.com/categories/WebSocket/
