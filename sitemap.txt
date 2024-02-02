@@ -1,3 +1,4 @@
+http://example.com/2024/02/02/springboot%E6%95%B4%E5%90%88elasticsearch2/
 http://example.com/2024/01/29/springboot%E6%95%B4%E5%90%88elasticsearch/
 http://example.com/2024/02/01/Gateway%E7%BD%91%E5%85%B3/
 http://example.com/2024/01/30/WebSocket%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/
@@ -20,9 +21,9 @@ http://example.com/tags/java/
 http://example.com/tags/Rest/
 http://example.com/tags/WebSocket/
 http://example.com/tags/Zookeeper/
-http://example.com/tags/elasticsearch/
 http://example.com/tags/maven/
+http://example.com/tags/elasticsearch/
 http://example.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
 http://example.com/categories/WebSocket/
-http://example.com/categories/elasticsearch/
 http://example.com/categories/maven/
+http://example.com/categories/elasticsearch/

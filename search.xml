@@ -306,6 +306,33 @@
       </tags>
   </entry>
   <entry>
+    <title>DependencyManagement和Dependencies区别</title>
+    <url>/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>dependencyManagement</p>
+<p>Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。<br>通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。</p>
+<p>使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven 会沿着父子层次向上走，直到找到一个拥有dependencyManagement 元素的项目，然后它就会使用这个<br>dependencyManagement 元素中指定的版本号。</p>
+<img src="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png" class="" title="test">
+
+<p>这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 ；另外如果某个子项目需要另外的一个版本，只需要声明version就可。</p>
+<ul>
+<li><pre><code>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
+</code></pre>
+</li>
+<li><p>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，<br> 才会从父项目中继承该项，并且version和scope都读取自父pom;</p>
+</li>
+<li><pre><code>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+</code></pre>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>springboot整合elasticsearch实现简单查询</title>
     <url>/2024/01/29/springboot%E6%95%B4%E5%90%88elasticsearch/</url>
     <content><![CDATA[<h1 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-elasticsearch&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.5.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
@@ -336,30 +363,17 @@
       </tags>
   </entry>
   <entry>
-    <title>DependencyManagement和Dependencies区别</title>
-    <url>/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>dependencyManagement</p>
-<p>Maven 使用dependencyManagement 元素来提供了一种管理依赖版本号的方式。<br>通常会在一个组织或者项目的最顶层的父POM 中看到dependencyManagement 元素。</p>
-<p>使用pom.xml 中的dependencyManagement 元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven 会沿着父子层次向上走，直到找到一个拥有dependencyManagement 元素的项目，然后它就会使用这个<br>dependencyManagement 元素中指定的版本号。</p>
-<img src="/2024/01/29/maven%E7%9A%84dependencyManagement%E5%92%8Cdependencies%E5%8C%BA%E5%88%AB/image-20240129160811215.png" class="" title="test">
+    <title>springboot整合elasticsearch实现复杂查询</title>
+    <url>/2024/02/02/springboot%E6%95%B4%E5%90%88elasticsearch2/</url>
+    <content><![CDATA[<h1 id="修改ElasticSearchService"><a href="#修改ElasticSearchService" class="headerlink" title="修改ElasticSearchService"></a>修改ElasticSearchService</h1><p>该类是在简单查询的基础上进行修改的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public List&lt;Map&lt;String, Object&gt;&gt; getContents(String keyword,</span><br><span class="line">                                             Integer pageNo,</span><br><span class="line">                                             Integer pageSize) throws IOException &#123;</span><br><span class="line">    // 查询索引为voides和user-infos的记录</span><br><span class="line">    String[] indices = &#123;&quot;videos&quot;, &quot;user-infos&quot;&#125;;</span><br><span class="line">    SearchRequest searchRequest = new SearchRequest(indices);</span><br><span class="line">    SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();</span><br><span class="line">    //分页</span><br><span class="line">    sourceBuilder.from(pageNo - 1);</span><br><span class="line">    sourceBuilder.size(pageSize);</span><br><span class="line">    MultiMatchQueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, &quot;title&quot;, &quot;nick&quot;, &quot;description&quot;);</span><br><span class="line">    sourceBuilder.query(matchQueryBuilder);</span><br><span class="line">    searchRequest.source(sourceBuilder);</span><br><span class="line">    sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));</span><br><span class="line">    //高亮显示，对array的字段进行高亮显示</span><br><span class="line">    String[] array = &#123;&quot;title&quot;, &quot;nick&quot;, &quot;description&quot;&#125;;</span><br><span class="line">    HighlightBuilder highlightBuilder = new HighlightBuilder();</span><br><span class="line">    for(String key : array)&#123;</span><br><span class="line">        highlightBuilder.fields().add(new HighlightBuilder.Field(key));</span><br><span class="line">    &#125;</span><br><span class="line">    highlightBuilder.requireFieldMatch(false); //如果要多个字段进行高亮，要为false</span><br><span class="line">    highlightBuilder.preTags(&quot;&lt;span style=\&quot;color:red\&quot;&gt;&quot;);</span><br><span class="line">    highlightBuilder.postTags(&quot;&lt;/span&gt;&quot;);</span><br><span class="line">    sourceBuilder.highlighter(highlightBuilder);</span><br><span class="line">    //执行搜索,restHighLevelClient是配置类里面的</span><br><span class="line">    SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; arrayList = new ArrayList&lt;&gt;();</span><br><span class="line">    for(SearchHit hit : searchResponse.getHits())&#123;</span><br><span class="line">        //处理高亮字段</span><br><span class="line">        Map&lt;String, HighlightField&gt; highLightBuilderFields = hit.getHighlightFields();</span><br><span class="line">        Map&lt;String, Object&gt; sourceMap = hit.getSourceAsMap();</span><br><span class="line">        for(String key : array)&#123;</span><br><span class="line">            HighlightField field = highLightBuilderFields.get(key);</span><br><span class="line">            if(field != null)&#123;</span><br><span class="line">                Text[] fragments = field.fragments();</span><br><span class="line">                String str = Arrays.toString(fragments);</span><br><span class="line">                str = str.substring(1, str.length()-1);</span><br><span class="line">                sourceMap.put(key, str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        arrayList.add(sourceMap);</span><br><span class="line">    &#125;</span><br><span class="line">    return arrayList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 ；另外如果某个子项目需要另外的一个版本，只需要声明version就可。</p>
-<ul>
-<li><pre><code>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
-</code></pre>
-</li>
-<li><p>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，<br> 才会从父项目中继承该项，并且version和scope都读取自父pom;</p>
-</li>
-<li><pre><code>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
-</code></pre>
-</li>
-</ul>
 ]]></content>
       <categories>
-        <category>maven</category>
+        <category>elasticsearch</category>
       </categories>
       <tags>
-        <tag>maven</tag>
+        <tag>elasticsearch</tag>
       </tags>
   </entry>
 </search>

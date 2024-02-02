@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2024/02/02/springboot%E6%95%B4%E5%90%88elasticsearch2/</loc>
+    
+    <lastmod>2024-02-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2024/01/29/springboot%E6%95%B4%E5%90%88elasticsearch/</loc>
     
     <lastmod>2024-02-02</lastmod>
@@ -186,14 +195,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/elasticsearch/</loc>
+    <loc>http://example.com/tags/maven/</loc>
     <lastmod>2024-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/maven/</loc>
+    <loc>http://example.com/tags/elasticsearch/</loc>
     <lastmod>2024-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -216,14 +225,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/elasticsearch/</loc>
+    <loc>http://example.com/categories/maven/</loc>
     <lastmod>2024-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/maven/</loc>
+    <loc>http://example.com/categories/elasticsearch/</loc>
     <lastmod>2024-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
