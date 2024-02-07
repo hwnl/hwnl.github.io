@@ -376,4 +376,49 @@
         <tag>elasticsearch</tag>
       </tags>
   </entry>
+  <entry>
+    <title>写作技巧总结</title>
+    <url>/2024/02/03/%E5%86%99%E4%BD%9C%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>写作技巧总结</category>
+      </categories>
+      <tags>
+        <tag>写作技巧总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网关整体架构设计</title>
+    <url>/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="网关一次http请求的全生命周期"><a href="#网关一次http请求的全生命周期" class="headerlink" title="网关一次http请求的全生命周期"></a>网关一次http请求的全生命周期</h1><img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207164128772.png" class="" title="test">
+
+<h1 id="网络拓扑详解"><a href="#网络拓扑详解" class="headerlink" title="网络拓扑详解"></a>网络拓扑详解</h1><img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207164437364.png" class="" title="test">
+
+<h1 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h1><img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207173436925.png" class="">
+
+<h2 id="常规做法"><a href="#常规做法" class="headerlink" title="常规做法"></a>常规做法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FutureTaskTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        FutureTask&lt;String&gt; ft2 = <span class="keyword">new</span> <span class="title class_">FutureTask</span>(<span class="keyword">new</span> <span class="title class_">T2Task</span>());</span><br><span class="line">        FutureTask&lt;String&gt; ft1 = <span class="keyword">new</span> <span class="title class_">FutureTask</span>(<span class="keyword">new</span> <span class="title class_">T1Task</span>(ft2));</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(ft1);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(ft2);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">        System.out.println(ft1.get());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">T2Task</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;String&gt;&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;T2 洗茶壶&quot;</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;T2 洗茶杯&quot;</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;T2 拿茶叶&quot;</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;红茶&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">T1Task</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&#123;</span><br><span class="line">        FutureTask ft2;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">T1Task</span><span class="params">(FutureTask ft2)</span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.ft2 = ft2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Object <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;洗水壶&quot;</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;烧水15分钟&quot;</span>);</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">tea</span> <span class="operator">=</span> (String) ft2.get();</span><br><span class="line">            System.out.println(<span class="string">&quot;拿到茶叶&quot;</span>+tea);</span><br><span class="line">            System.out.println(<span class="string">&quot;泡茶&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;喝茶&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面定义了两个线程，T2Task执行洗茶壶，洗茶杯，拿茶叶的操作</p>
+<p>T1Task执行洗水壶，烧水，等待T2Task的茶叶，然后进行泡茶喝茶</p>
+<h2 id="completableFuture做法"><a href="#completableFuture做法" class="headerlink" title="completableFuture做法"></a>completableFuture做法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class CompletableFutureTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 任务一 洗水壶，烧开水</span><br><span class="line">        CompletableFuture&lt;Void&gt; f1 = CompletableFuture.runAsync(()-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;T1 洗水壶&quot;);</span><br><span class="line">            sleep(1l);</span><br><span class="line">            System.out.println(&quot;T1 烧开水&quot;);</span><br><span class="line">            sleep(1l);</span><br><span class="line">        &#125;);</span><br><span class="line">        // 任务二 洗茶壶，洗茶杯，拿茶叶</span><br><span class="line">        CompletableFuture&lt;String&gt; f2 = CompletableFuture.supplyAsync(()-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;T2 洗茶壶&quot;);</span><br><span class="line">            sleep(1l);</span><br><span class="line">            System.out.println(&quot;T2 洗茶杯&quot;);</span><br><span class="line">            sleep(1l);</span><br><span class="line">            System.out.println(&quot;T2 拿茶叶&quot;);</span><br><span class="line">            sleep(1l);</span><br><span class="line">            return &quot;红茶&quot;;</span><br><span class="line">        &#125;);</span><br><span class="line">        // 任务三 任务一和任务二执行完了，再泡茶</span><br><span class="line">        CompletableFuture&lt;String&gt; f3 = f1.thenCombine(f2,(__,tf)-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;T1 拿到茶叶&quot;+tf);</span><br><span class="line">            System.out.println(&quot;T1 泡茶&quot;);</span><br><span class="line">            return &quot;喝茶:&quot;+tf;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(f3.join());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void sleep(Long time)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(time);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>f1.thenCombine(f2,(__,tf))</p>
+<p>f1代表第一个任务，f2代表第二个任务，__代表第一个参数，因为第一个没有参数，相当于一个占位符，tf代表f2的参数</p>
+<p>该方法便是在f1,f2执行完后，在执行f3</p>
+<h1 id="网关整体架构"><a href="#网关整体架构" class="headerlink" title="网关整体架构"></a>网关整体架构</h1><img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207190854622.png" class="">
+
+<img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207191833563.png" class="">
+
+<img src="/2024/02/07/%E7%BD%91%E5%85%B3%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/image-20240207191910977.png" class="">
+
+
+
+]]></content>
+      <categories>
+        <category>自研网关</category>
+      </categories>
+      <tags>
+        <tag>自研网关</tag>
+      </tags>
+  </entry>
 </search>
